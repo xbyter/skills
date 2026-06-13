@@ -1,5 +1,5 @@
 ---
-name: 创建PRD
+name: to-prd
 description: 将当前对话上下文转化为 PRD 并发布到项目问题跟踪器。当用户想要基于当前上下文创建 PRD 时使用。
 ---
 

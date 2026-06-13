@@ -1,5 +1,5 @@
 ---
-name: 改进代码库架构
+name: improve-codebase-architecture
 description: 基于 CONTEXT.md 中的领域语言和 docs/adr/ 中的决策，在代码库中发现深化机会。当用户想要改进架构、寻找重构机会、整合紧密耦合的模块，或使代码库更具可测试性和 AI 可导航性时使用。
 ---
 

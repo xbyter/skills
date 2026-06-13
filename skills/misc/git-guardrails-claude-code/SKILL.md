@@ -1,5 +1,5 @@
 ---
-name: Git安全护栏
+name: git-guardrails-claude-code
 description: 设置 Claude Code 钩子，在执行危险的 git 命令（push、reset --hard、clean、branch -D 等）前拦截它们。当用户想要防止破坏性 git 操作、添加 git 安全钩子或拦截 Claude Code 中的 git push/reset 时使用。
 ---
 

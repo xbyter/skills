@@ -1,5 +1,5 @@
 ---
-name: 教学
+name: teach
 description: 在本工作区内教授用户一项新技能或概念。
 disable-model-invocation: true
 argument-hint: "What would you like to learn about?"

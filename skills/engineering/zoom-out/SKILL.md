@@ -1,5 +1,5 @@
 ---
-name: 全局视野
+name: zoom-out
 description: 告诉代理放宽视野，提供更广泛的上下文或更高层次的视角。当你对某段代码不熟悉或需要了解它在整体中的位置时使用。
 disable-model-invocation: true
 ---

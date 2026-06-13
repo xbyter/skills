@@ -1,5 +1,5 @@
 ---
-name: 创建Issue
+name: to-issues
 description: 将计划、规格或 PRD 拆分为项目问题跟踪器上可独立领取的 issue，使用追踪弹式垂直切片方法。当用户想要将计划转化为 issue、创建实施任务或将工作拆分为 issue 时使用。
 ---
 

@@ -1,5 +1,5 @@
 ---
-name: 设置预提交钩子
+name: setup-pre-commit
 description: 在当前仓库中设置 Husky 预提交钩子，集成 lint-staged（Prettier）、类型检查和测试。当用户想要添加预提交钩子、设置 Husky、配置 lint-staged，或添加提交时的格式化/类型检查/测试时使用。
 ---
 

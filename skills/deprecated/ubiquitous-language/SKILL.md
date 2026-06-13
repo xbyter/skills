@@ -1,5 +1,5 @@
 ---
-name: 统一语言
+name: ubiquitous-language
 description: 从当前对话中提取 DDD 风格的统一语言术语表，标记歧义并提出规范术语建议。保存到 UBIQUITOUS_LANGUAGE.md。当用户想要定义领域术语、构建术语表、巩固术语、创建统一语言，或提到"领域模型"或"DDD"时使用。
 disable-model-invocation: true
 ---

@@ -1,5 +1,5 @@
 ---
-name: Obsidian知识库
+name: obsidian-vault
 description: 在 Obsidian 知识库中使用 wiki 链接和索引笔记进行搜索、创建和管理笔记。当用户想要在 Obsidian 中查找、创建或组织笔记时使用。
 ---
 
