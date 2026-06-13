@@ -3,35 +3,35 @@ name: scaffold-exercises
 description: Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.
 ---
 
-# Scaffold Exercises
+# 脚手架练习
 
-Create exercise directory structures that pass `pnpm ai-hero-cli internal lint`, then commit with `git commit`.
+创建通过 `pnpm ai-hero-cli internal lint` 的练习目录结构，然后用 `git commit` 提交。
 
-## Directory naming
+## 目录命名
 
-- **Sections**: `XX-section-name/` inside `exercises/` (e.g., `01-retrieval-skill-building`)
-- **Exercises**: `XX.YY-exercise-name/` inside a section (e.g., `01.03-retrieval-with-bm25`)
-- Section number = `XX`, exercise number = `XX.YY`
-- Names are dash-case (lowercase, hyphens)
+- **Sections**: `XX-section-name/` 在 `exercises/` 内（例如 `01-retrieval-skill-building`）
+- **Exercises**: `XX.YY-exercise-name/` 在 section 内（例如 `01.03-retrieval-with-bm25`）
+- Section 编号 = `XX`，exercise 编号 = `XX.YY`
+- 名称使用 dash-case（小写，连字符）
 
-## Exercise variants
+## 练习变体
 
-Each exercise needs at least one of these subfolders:
+每个练习需要至少一个以下子文件夹：
 
-- `problem/` - student workspace with TODOs
-- `solution/` - reference implementation
-- `explainer/` - conceptual material, no TODOs
+- `problem/` - 带 TODO 的学生工作区
+- `solution/` - 参考实现
+- `explainer/` - 概念材料，无 TODO
 
-When stubbing, default to `explainer/` unless the plan specifies otherwise.
+做桩时，默认用 `explainer/` 除非计划另有指定。
 
-## Required files
+## 必需文件
 
-Each subfolder (`problem/`, `solution/`, `explainer/`) needs a `readme.md` that:
+每个子文件夹（`problem/`、`solution/`、`explainer/`）需要一个 `readme.md`：
 
-- Is **not empty** (must have real content, even a single title line works)
-- Has no broken links
+- **不为空**（必须有真实内容，即使只有一行标题也行）
+- 无损坏链接
 
-When stubbing, create a minimal readme with a title and a description:
+做桩时，创建带标题和描述的最小 readme：
 
 ```md
 # Exercise Title
@@ -39,46 +39,46 @@ When stubbing, create a minimal readme with a title and a description:
 Description here
 ```
 
-If the subfolder has code, it also needs a `main.ts` (>1 line). But for stubs, a readme-only exercise is fine.
+如果子文件夹有代码，它还需要一个 `main.ts`（>1 行）。但对于桩，仅 readme 的练习即可。
 
-## Workflow
+## 工作流
 
-1. **Parse the plan** - extract section names, exercise names, and variant types
-2. **Create directories** - `mkdir -p` for each path
-3. **Create stub readmes** - one `readme.md` per variant folder with a title
-4. **Run lint** - `pnpm ai-hero-cli internal lint` to validate
-5. **Fix any errors** - iterate until lint passes
+1. **解析计划** - 提取 section 名称、exercise 名称和变体类型
+2. **创建目录** - 对每个路径执行 `mkdir -p`
+3. **创建桩 readmes** - 每个变体文件夹一个带标题的 `readme.md`
+4. **运行 lint** - `pnpm ai-hero-cli internal lint` 验证
+5. **修复任何错误** - 迭代直到 lint 通过
 
-## Lint rules summary
+## Lint 规则摘要
 
-The linter (`pnpm ai-hero-cli internal lint`) checks:
+Linter（`pnpm ai-hero-cli internal lint`）检查：
 
-- Each exercise has subfolders (`problem/`, `solution/`, `explainer/`)
-- At least one of `problem/`, `explainer/`, or `explainer.1/` exists
-- `readme.md` exists and is non-empty in the primary subfolder
-- No `.gitkeep` files
-- No `speaker-notes.md` files
-- No broken links in readmes
-- No `pnpm run exercise` commands in readmes
-- `main.ts` required per subfolder unless it's readme-only
+- 每个 exercise 有子文件夹（`problem/`、`solution/`、`explainer/`）
+- 至少存在 `problem/`、`explainer/` 或 `explainer.1/` 之一
+- `readme.md` 在主子文件夹中存在且非空
+- 无 `.gitkeep` 文件
+- 无 `speaker-notes.md` 文件
+- Readmes 中无损坏链接
+- Readmes 中无 `pnpm run exercise` 命令
+- 每个子文件夹需要 `main.ts` 除非是仅 readme
 
-## Moving/renaming exercises
+## 移动/重命名练习
 
-When renumbering or moving exercises:
+重新编号或移动练习时：
 
-1. Use `git mv` (not `mv`) to rename directories - preserves git history
-2. Update the numeric prefix to maintain order
-3. Re-run lint after moves
+1. 使用 `git mv`（而非 `mv`）重命名目录 - 保留 git 历史
+2. 更新数字前缀以保持顺序
+3. 移动后重新运行 lint
 
-Example:
+示例：
 
 ```bash
 git mv exercises/01-retrieval/01.03-embeddings exercises/01-retrieval/01.04-embeddings
 ```
 
-## Example: stubbing from a plan
+## 示例：从计划做桩
 
-Given a plan like:
+给定计划：
 
 ```
 Section 05: Memory Skill Building
@@ -87,7 +87,7 @@ Section 05: Memory Skill Building
 - 05.03 Long-term Memory
 ```
 
-Create:
+创建：
 
 ```bash
 mkdir -p exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer
@@ -95,7 +95,7 @@ mkdir -p exercises/05-memory-skill-building/05.02-short-term-memory/{explainer,p
 mkdir -p exercises/05-memory-skill-building/05.03-long-term-memory/explainer
 ```
 
-Then create readme stubs:
+然后创建 readme 桩：
 
 ```
 exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer/readme.md -> "# Introduction to Memory"

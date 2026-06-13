@@ -3,79 +3,79 @@ name: improve-codebase-architecture
 description: Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. Use when the user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable.
 ---
 
-# Improve Codebase Architecture
+# 改善代码库架构
 
-Surface architectural friction and propose **deepening opportunities** — refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
+发现架构摩擦并提出**深化机会** —— 将浅模块转化为深模块的重构。目标是可测试性和 AI 可导航性。
 
-## Glossary
+## 术语表
 
-Use these terms exactly in every suggestion. Consistent language is the point — don't drift into "component," "service," "API," or "boundary." Full definitions in [LANGUAGE.md](LANGUAGE.md).
+在每个建议中精确使用这些术语。一致的语言就是目的 —— 不要偏向"component"、"service"、"API"或"boundary"。完整定义见 [LANGUAGE.md](LANGUAGE.md)。
 
-- **Module** — anything with an interface and an implementation (function, class, package, slice).
-- **Interface** — everything a caller must know to use the module: types, invariants, error modes, ordering, config. Not just the type signature.
-- **Implementation** — the code inside.
-- **Depth** — leverage at the interface: a lot of behaviour behind a small interface. **Deep** = high leverage. **Shallow** = interface nearly as complex as the implementation.
-- **Seam** — where an interface lives; a place behaviour can be altered without editing in place. (Use this, not "boundary.")
-- **Adapter** — a concrete thing satisfying an interface at a seam.
-- **Leverage** — what callers get from depth.
-- **Locality** — what maintainers get from depth: change, bugs, knowledge concentrated in one place.
+- **Module** —— 任何具有接口和实现的东西（函数、类、包、切片）。
+- **Interface** —— 调用者使用模块所需知道的一切：类型、不变量、错误模式、顺序、配置。不仅仅是类型签名。
+- **Implementation** —— 内部代码。
+- **Depth** —— 接口处的杠杆效应：小接口后面大量行为。**Deep** = 高杠杆。**Shallow** = 接口几乎与实现一样复杂。
+- **Seam** —— 接口所在的位置；可以改变行为而无需就地编辑的地方。（用这个，而非"boundary"。）
+- **Adapter** —— 在接缝处满足接口的具体东西。
+- **Leverage** —— 调用者从深度中获得的。
+- **Locality** —— 维护者从深度中获得的：变更、bug、知识集中在一个地方。
 
-Key principles (see [LANGUAGE.md](LANGUAGE.md) for the full list):
+关键原则（完整列表见 [LANGUAGE.md](LANGUAGE.md)）：
 
-- **Deletion test**: imagine deleting the module. If complexity vanishes, it was a pass-through. If complexity reappears across N callers, it was earning its keep.
-- **The interface is the test surface.**
-- **One adapter = hypothetical seam. Two adapters = real seam.**
+- **删除测试**：想象删除该模块。如果复杂性消失了，它只是透传。如果复杂性在 N 个调用者处重新出现，它就发挥了作用。
+- **接口就是测试面。**
+- **一个 adapter = 假设性接缝。两个 adapter = 真实接缝。**
 
-This skill is _informed_ by the project's domain model. The domain language gives names to good seams; ADRs record decisions the skill should not re-litigate.
+此 skill *参考*项目的领域模型。领域语言为好的接缝命名；ADR 记录此 skill 不应重新争论的决策。
 
-## Process
+## 流程
 
-### 1. Explore
+### 1. 探索
 
-Read the project's domain glossary and any ADRs in the area you're touching first.
+首先阅读项目的领域术语表和你正在接触的区域的任何 ADR。
 
-Then use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't follow rigid heuristics — explore organically and note where you experience friction:
+然后使用 Agent 工具以 `subagent_type=Explore` 浏览代码库。不要遵循死板的启发式 —— 有机地探索并注意你在哪里体验到摩擦：
 
-- Where does understanding one concept require bouncing between many small modules?
-- Where are modules **shallow** — interface nearly as complex as the implementation?
-- Where have pure functions been extracted just for testability, but the real bugs hide in how they're called (no **locality**)?
-- Where do tightly-coupled modules leak across their seams?
-- Which parts of the codebase are untested, or hard to test through their current interface?
+- 理解一个概念需要在许多小模块之间跳转？
+- 哪些模块是**浅的** —— 接口几乎与实现一样复杂？
+- 哪些纯函数被提取只是为了可测试性，但真正的 bug 隐藏在它们的调用方式中（没有**局部性**）？
+- 哪些紧耦合的模块跨接缝泄漏？
+- 代码库的哪些部分未经测试，或通过当前接口难以测试？
 
-Apply the **deletion test** to anything you suspect is shallow: would deleting it concentrate complexity, or just move it? A "yes, concentrates" is the signal you want.
+对你怀疑是浅的任何东西应用**删除测试**：删除它会集中复杂性，还是只是移动它？"是的，集中"是你想要的信号。
 
-### 2. Present candidates as an HTML report
+### 2. 以 HTML 报告呈现候选
 
-Write a self-contained HTML file to the OS temp directory so nothing lands in the repo. Resolve the temp dir from `$TMPDIR`, falling back to `/tmp` (or `%TEMP%` on Windows), and write to `<tmpdir>/architecture-review-<timestamp>.html` so each run gets a fresh file. Open it for the user — `xdg-open <path>` on Linux, `open <path>` on macOS, `start <path>` on Windows — and tell them the absolute path.
+将自包含 HTML 文件写入操作系统临时目录，这样不会有任何东西落入仓库。从 `$TMPDIR` 解析临时目录，回退到 `/tmp`（或 Windows 上的 `%TEMP%`），写入 `<tmpdir>/architecture-review-<timestamp>.html` 以便每次运行获得新文件。为用户打开它 —— Linux 上 `xdg-open <path>`，macOS 上 `open <path>`，Windows 上 `start <path>` —— 并告诉他们绝对路径。
 
-The report uses **Tailwind via CDN** for layout and styling, and **Mermaid via CDN** for diagrams where a graph/flow/sequence reliably communicates the structure. Mix Mermaid with hand-crafted CSS/SVG visuals — use Mermaid when relationships are graph-shaped (call graphs, dependencies, sequences), and hand-built divs/SVG when you want something more editorial (mass diagrams, cross-sections, collapse animations). Each candidate gets a **before/after visualisation**. Be visual.
+报告使用 **Tailwind via CDN** 进行布局和样式，**Mermaid via CDN** 在图/流/序列可靠传达结构时用于图表。将 Mermaid 与手工 CSS/SVG 视觉混合 —— 当关系是图形的（调用图、依赖、序列）时用 Mermaid，当你想要更具编辑性的东西（质量图、截面图、折叠动画）时用手工 divs/SVG。每个候选获得 **before/after 可视化**。要视觉化。
 
-For each candidate, the same template as before, but rendered as a card:
+对于每个候选，使用与之前相同的模板，但渲染为卡片：
 
-- **Files** — which files/modules are involved
-- **Problem** — why the current architecture is causing friction
-- **Solution** — plain English description of what would change
-- **Benefits** — explained in terms of locality and leverage, and how tests would improve
-- **Before / After diagram** — side-by-side, custom-drawn, illustrating the shallowness and the deepening
-- **Recommendation strength** — one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge
+- **文件** —— 涉及哪些文件/模块
+- **问题** —— 为什么当前架构导致摩擦
+- **解决方案** —— 用朴素英文描述什么会改变
+- **收益** —— 用局部性和杠杆效应来解释，以及测试会如何改善
+- **Before / After 图表** —— 并排，自定义绘制，说明浅度和深化
+- **推荐强度** —— `Strong`、`Worth exploring`、`Speculative` 之一，渲染为徽章
 
-End the report with a **Top recommendation** section: which candidate you'd tackle first and why.
+以**最佳推荐**部分结束报告：你会先处理哪个候选以及为什么。
 
-**Use CONTEXT.md vocabulary for the domain, and [LANGUAGE.md](LANGUAGE.md) vocabulary for the architecture.** If `CONTEXT.md` defines "Order," talk about "the Order intake module" — not "the FooBarHandler," and not "the Order service."
+**使用 CONTEXT.md 词汇表示领域，使用 [LANGUAGE.md](LANGUAGE.md) 词汇表示架构。** 如果 `CONTEXT.md` 定义了 "Order"，谈论 "Order intake 模块" —— 而非 "FooBarHandler"，也不是 "Order service"。
 
-**ADR conflicts**: if a candidate contradicts an existing ADR, only surface it when the friction is real enough to warrant revisiting the ADR. Mark it clearly in the card (e.g. a warning callout: _"contradicts ADR-0007 — but worth reopening because…"_). Don't list every theoretical refactor an ADR forbids.
+**ADR 冲突**：如果候选与现有 ADR 矛盾，仅在摩擦确实严重到需要重新审视 ADR 时才提出。在卡片中明确标记（例如警告提示：_"与 ADR-0007 矛盾 —— 但值得重新打开因为…"_）。不要列出 ADR 禁止的每个理论重构。
 
-See [HTML-REPORT.md](HTML-REPORT.md) for the full HTML scaffold, diagram patterns, and styling guidance.
+参见 [HTML-REPORT.md](HTML-REPORT.md) 了解完整的 HTML 脚手架、图表模式和样式指南。
 
-Do NOT propose interfaces yet. After the file is written, ask the user: "Which of these would you like to explore?"
+不要提出接口建议。文件写入后，问用户："你想探索哪些？"
 
-### 3. Grilling loop
+### 3. Grilling 循环
 
-Once the user picks a candidate, drop into a grilling conversation. Walk the design tree with them — constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive.
+一旦用户选择了一个候选，进入 grilling 对话。与他们一起走过设计树 —— 约束、依赖、深化后模块的形状、接缝后面有什么、哪些测试存活。
 
-Side effects happen inline as decisions crystallize:
+副作用在决策结晶时内联发生：
 
-- **Naming a deepened module after a concept not in `CONTEXT.md`?** Add the term to `CONTEXT.md` — same discipline as `/grill-with-docs` (see [CONTEXT-FORMAT.md](../grill-with-docs/CONTEXT-FORMAT.md)). Create the file lazily if it doesn't exist.
-- **Sharpening a fuzzy term during the conversation?** Update `CONTEXT.md` right there.
-- **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing — skip ephemeral reasons ("not worth it right now") and self-evident ones. See [ADR-FORMAT.md](../grill-with-docs/ADR-FORMAT.md).
-- **Want to explore alternative interfaces for the deepened module?** See [INTERFACE-DESIGN.md](INTERFACE-DESIGN.md).
+- **用 `CONTEXT.md` 中没有的概念命名深化后的模块？** 将术语添加到 `CONTEXT.md` —— 与 `/grill-with-docs` 相同的纪律（参见 [CONTEXT-FORMAT.md](../grill-with-docs/CONTEXT-FORMAT.md)）。如果文件不存在则按需创建。
+- **在对话中打磨模糊的术语？** 立即更新 `CONTEXT.md`。
+- **用户以有分量的理由拒绝候选？** 提供 ADR，框架为：_"想让我将其记录为 ADR，以便未来的架构审查不会重新建议它？"_ 仅当理由确实需要未来探索者避免重新建议同一事物时才提供 —— 跳过暂时性理由（"现在不值得"）和不言自明的理由。参见 [ADR-FORMAT.md](../grill-with-docs/ADR-FORMAT.md)。
+- **想探索深化后模块的替代接口？** 参见 [INTERFACE-DESIGN.md](INTERFACE-DESIGN.md)。

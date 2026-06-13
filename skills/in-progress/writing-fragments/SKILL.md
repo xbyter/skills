@@ -5,71 +5,71 @@ description: Grilling session that mines the user for fragments — heterogeneou
 
 <what-to-do>
 
-Run a grilling session that produces fragments. Interview the user relentlessly about whatever they want to write about. Do not impose phases, outlines, or structure — that is explicitly out of scope.
+运行产生 fragments 的 grilling session。无情地采访用户想写的任何内容。不要施加阶段、大纲或结构——这明确超出范围。
 
-As fragments emerge from either side of the conversation, append them to a single markdown file. The user will be editing this file during the session; always re-read it before writing so their edits are preserved.
+当 fragments 从对话双方涌现时，将它们追加到单一 markdown 文件。用户将在会话期间编辑此文件；每次写入前重新阅读以保留他们的编辑。
 
-If the user did not pass a path, ask once where to save the document, then remember it for the rest of the session.
+如果用户未传递路径，问一次在哪里保存文档，然后在会话的其余时间记住它。
 
-Capture fragments from the very first thing the user says, including the initial prompt.
+从用户说的第一件事开始捕获 fragments，包括初始提示。
 
-On first write, put a single H1 at the top with a working title (it can change later) and nothing else — no metadata, no TOC, no date.
+首次写入时，在顶部放置一个带工作标题的 H1（之后可以更改），仅此而已——无元数据、无目录、无日期。
 
 </what-to-do>
 
 <supporting-info>
 
-## What is a fragment
+## 什么是 fragment
 
-A fragment is any piece of text that might survive into the final article. It must be _readable by the author_ — the author can tell what it means — but it does not need to define its terms or be comprehensible to a cold reader. The bar is "is this a piece of good writing?", not "is this a self-contained argument?"
+Fragment 是任何可能存活到最终文章中的文本片段。它必须_对作者可读_——作者能看出它的意思——但不需要定义其术语或对冷读者可理解。标准是"这是一段好写作吗？"而非"这是自包含的论点吗？"
 
-Fragments are deliberately heterogeneous. Examples of what could be a fragment:
+Fragments 故意异质。以下是 fragment 可能的示例：
 
-- A sharp sentence you'd want to deploy somewhere but don't yet know where.
-- A claim with a one-line justification.
-- A vignette: a thing that happened, a code snippet, a scenario, an analogy.
-- A half-thought: "something about how X feels like Y, work this out later."
-- A quote, a piece of dialogue, an overheard line.
-- A list of related observations that hang together by feel.
-- A complaint, a confession, a punchline.
+- 你想在某处使用但还不知道在哪的犀利句子。
+- 带一行理由的断言。
+- 小品：发生过的事、代码片段、场景、类比。
+- 半想法："关于 X 感觉像 Y 的东西，以后再想清楚。"
+- 引用、对话片段、无意中听到的话。
+- 凭感觉聚集在一起的相关观察列表。
+- 抱怨、坦白、妙语。
 
-The novelist's diary is the model: years of unstructured noticings that later get mined for raw material. Fragments are noticings.
+小说家的日记是模型：多年的无结构观察后来被挖掘为原材料。Fragments 就是观察。
 
-## File format
+## 文件格式
 
 ```markdown
-# Working title
+# 工作标题
 
-A first fragment lives here.
+第一个 fragment 在这里。
 
-It can be multiple paragraphs. It can include lists, code, quotes — whatever
-shape the fragment naturally takes.
-
----
-
-A second fragment.
+可以是多段。可以包括列表、代码、引用——fragment 自然采取的
+任何形状。
 
 ---
 
-> A quoted line that the user wants to keep around.
-
-A reaction to it.
+第二个 fragment。
 
 ---
 
-- A cluster of related observations
-- That hang together by feel
-- And want to be near each other
+> 用户想保留的引用行。
+
+对它的反应。
+
+---
+
+- 一组相关观察
+- 凭感觉聚集在一起
+- 想要彼此靠近
 ```
 
-Fragments are separated by a horizontal rule (`\n---\n`). No headings inside the body. No tags. No order beyond the order they were added.
+Fragments 之间用水平线（`\n---\n`）分隔。正文内无标题。无标签。除添加顺序外无排序。
 
-## Writing rhythm
+## 写作节奏
 
-Append silently. Don't ask permission for each fragment. Mention what you added in passing ("adding that"), but don't interrupt the conversation with save dialogs.
+安静地追加。不要为每个 fragment 请求许可。顺带提及你添加了什么（"加上那个"），但不要用保存对话框打断对话。
 
-Before every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns — preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place).
+每次写入前：从磁盘重新阅读文件。用户可能在回合之间编辑、重新排序或删除了 fragments——保留他们的更改。永远不要覆盖文件；只追加（或，如果用户要求，就地编辑特定 fragment）。
 
-The user can say "cut the last one", "rewrite that one sharper", "merge those two" at any time. Treat those as first-class instructions.
+用户随时可以说"删掉最后一个"、"重写那个更犀利"、"合并那两个"。将这些视为一等指令。
 
 </supporting-info>

@@ -1,33 +1,33 @@
-# Deep Modules
+# 深模块
 
-From "A Philosophy of Software Design":
+来自"A Philosophy of Software Design"：
 
-**Deep module** = small interface + lots of implementation
+**深模块** = 小接口 + 大量实现
 
 ```
 ┌─────────────────────┐
-│   Small Interface   │  ← Few methods, simple params
+│   Small Interface   │  ← 少量方法，简单参数
 ├─────────────────────┤
 │                     │
 │                     │
-│  Deep Implementation│  ← Complex logic hidden
+│  Deep Implementation│  ← 复杂逻辑被隐藏
 │                     │
 │                     │
 └─────────────────────┘
 ```
 
-**Shallow module** = large interface + little implementation (avoid)
+**浅模块** = 大接口 + 少量实现（避免）
 
 ```
 ┌─────────────────────────────────┐
-│       Large Interface           │  ← Many methods, complex params
+│       Large Interface           │  ← 很多方法，复杂参数
 ├─────────────────────────────────┤
-│  Thin Implementation            │  ← Just passes through
+│  Thin Implementation            │  ← 只是传递
 └─────────────────────────────────┘
 ```
 
-When designing interfaces, ask:
+设计接口时，问自己：
 
-- Can I reduce the number of methods?
-- Can I simplify the parameters?
-- Can I hide more complexity inside?
+- 能否减少方法数量？
+- 能否简化参数？
+- 能否在内部隐藏更多复杂性？

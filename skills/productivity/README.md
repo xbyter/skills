@@ -1,9 +1,9 @@
 # Productivity
 
-General workflow tools, not code-specific.
+通用工作流工具，非代码特定。
 
-- **[caveman](./caveman/SKILL.md)** — Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler while keeping full technical accuracy.
-- **[grill-me](./grill-me/SKILL.md)** — Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
-- **[handoff](./handoff/SKILL.md)** — Compact the current conversation into a handoff document so another agent can continue the work.
-- **[teach](./teach/SKILL.md)** — Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
-- **[write-a-skill](./write-a-skill/SKILL.md)** — Create new skills with proper structure, progressive disclosure, and bundled resources.
+- **[caveman](./caveman/SKILL.md)** — 超压缩通信模式。通过去除填充词将 token 使用量减少约 75%，同时保持完整技术精度。
+- **[grill-me](./grill-me/SKILL.md)** — 对计划或设计进行无情采访，直到决策树的每个分支都被解决。
+- **[handoff](./handoff/SKILL.md)** — 将当前对话压缩为交接文档，以便另一个 agent 可以继续工作。
+- **[teach](./teach/SKILL.md)** — 在多个会话中教用户新 skill 或概念，使用当前目录作为有状态教学工作区。
+- **[write-a-skill](./write-a-skill/SKILL.md)** — 创建具有正确结构、渐进式披露和捆绑资源的新 skills。
