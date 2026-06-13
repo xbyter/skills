@@ -1,6 +1,6 @@
 ---
-name: edit-article
-description: Edit and improve articles by restructuring sections, improving clarity, and tightening prose. Use when user wants to edit, revise, or improve an article draft.
+name: 编辑文章
+description: 通过重组章节、提升清晰度和精简表述来编辑和改进文章。当用户想要编辑、修订或改进文章草稿时使用。
 ---
 
 1. 首先，根据标题将文章分为若干章节。思考你在这些章节中想表达的主要观点。

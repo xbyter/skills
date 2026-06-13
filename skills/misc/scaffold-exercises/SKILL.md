@@ -1,6 +1,6 @@
 ---
-name: scaffold-exercises
-description: Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.
+name: 练习脚手架
+description: 创建练习目录结构，包含章节、问题、解答和说明文件，确保能通过 lint 检查。当用户想要搭建练习结构、创建练习模板或设置新的课程章节时使用。
 ---
 
 # 脚手架练习

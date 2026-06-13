@@ -1,6 +1,6 @@
 ---
-name: grill-me
-description: Interview the user relentlessly about a plan or design until reaching shared understanding, resolving each branch of the decision tree. Use when user wants to stress-test a plan, get grilled on their design, or mentions "grill me".
+name: 深度访谈
+description: 对用户进行深入的计划或设计访谈，直到达成共识，解决决策树的每个分支。当用户想要压力测试计划、对设计进行深入讨论，或提到"深入访谈"时使用。
 ---
 
 无情地采访我这个计划的每个方面，直到我们达成共识。走遍设计树的每个分支，逐个解决决策之间的依赖关系。对于每个问题，提供你的推荐答案。

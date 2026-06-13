@@ -1,6 +1,6 @@
 ---
-name: writing-shape
-description: Take a markdown file of raw material and shape it into an article through a conversational session — drafting candidate openings, growing the piece paragraph by paragraph, arguing about format (lists, tables, callouts, quotes) at each step. Use when the user has a pile of notes, fragments, or a rough draft and wants help turning it into something publishable.
+name: 写作成型
+description: 获取一份原始素材的 markdown 文件，通过对话式会话将其打磨成文章——草拟候选开头，逐段扩展文章，每一步讨论格式（列表、表格、标注、引用）。当用户有一堆笔记、片段或粗略草稿并希望帮助将其转化为可发表的内容时使用。
 ---
 
 <what-to-do>
